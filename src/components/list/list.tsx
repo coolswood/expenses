@@ -1,8 +1,8 @@
 import { Component, Listen, Prop, State, h } from '@stencil/core';
 
 type expenseType = {
-  id: number,
-  amount: number,
+  id: string,
+  amount: string,
   description: string
 }
 
@@ -12,15 +12,27 @@ type expenseType = {
 export class MyComponent {
   @State() expensesList: expenseType[] = [
     {
-      id: 1,
-      amount: 1000,
+      id: '1',
+      amount: '1000',
       description: 'This is my rent'
     }
   ];
 
   @Listen('buttonClicked')
   onButtonClicked(event: CustomEvent) {
+    console.log(event.detail);
     this.expensesList = [...this.expensesList, event.detail];
+  }
+
+  @Listen('itemEdit')
+  onItemEdited(event: CustomEvent) {
+    console.log(event.detail);
+    this.expensesList = this.expensesList.map((expense) => {
+      if (expense.id === event.detail.id) {
+        return event.detail;
+      }
+      return expense;
+    });
   }
 
   render() {
@@ -29,11 +41,7 @@ export class MyComponent {
 
       {
         this.expensesList.map((expense) => {
-          return <div>
-          <p>{expense.description}</p>
-          <p>{expense.amount}</p>
-          <button>edit</button>
-        </div>
+          return <app-item id={expense.id} description={expense.description} amount={expense.amount}></app-item>
         })
       }
     </div>;

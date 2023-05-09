@@ -8,6 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppForm {
     }
+    interface AppItem {
+        "amount": string;
+        "description": string;
+        "id": string;
+    }
     interface AppList {
     }
     interface AppRoot {
@@ -17,12 +22,22 @@ export interface AppFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLAppFormElement;
 }
+export interface AppItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLAppItemElement;
+}
 declare global {
     interface HTMLAppFormElement extends Components.AppForm, HTMLStencilElement {
     }
     var HTMLAppFormElement: {
         prototype: HTMLAppFormElement;
         new (): HTMLAppFormElement;
+    };
+    interface HTMLAppItemElement extends Components.AppItem, HTMLStencilElement {
+    }
+    var HTMLAppItemElement: {
+        prototype: HTMLAppItemElement;
+        new (): HTMLAppItemElement;
     };
     interface HTMLAppListElement extends Components.AppList, HTMLStencilElement {
     }
@@ -38,6 +53,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-form": HTMLAppFormElement;
+        "app-item": HTMLAppItemElement;
         "app-list": HTMLAppListElement;
         "app-root": HTMLAppRootElement;
     }
@@ -46,12 +62,19 @@ declare namespace LocalJSX {
     interface AppForm {
         "onButtonClicked"?: (event: AppFormCustomEvent<any>) => void;
     }
+    interface AppItem {
+        "amount"?: string;
+        "description"?: string;
+        "id"?: string;
+        "onItemEdit"?: (event: AppItemCustomEvent<any>) => void;
+    }
     interface AppList {
     }
     interface AppRoot {
     }
     interface IntrinsicElements {
         "app-form": AppForm;
+        "app-item": AppItem;
         "app-list": AppList;
         "app-root": AppRoot;
     }
@@ -61,6 +84,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
+            "app-item": LocalJSX.AppItem & JSXBase.HTMLAttributes<HTMLAppItemElement>;
             "app-list": LocalJSX.AppList & JSXBase.HTMLAttributes<HTMLAppListElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
         }

@@ -6,7 +6,7 @@ import { Component, State, h, Event, EventEmitter } from '@stencil/core';
 export class MyComponent {
 
     @State() description: string;
-    @State() amount: number;
+    @State() amount: string;
 
     onChangeField = (event) => {
         switch (event.target.name) {
@@ -30,6 +30,9 @@ export class MyComponent {
             description: this.description,
             amount: this.amount
         });
+        
+        this.description = undefined;
+        this.amount = undefined;
     }
   
   render() {
