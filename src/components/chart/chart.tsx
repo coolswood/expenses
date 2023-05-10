@@ -7,16 +7,20 @@ import {init, ECharts} from 'echarts';
   shadow: true
 })
 export class Chart {
-    @Prop() data: number[];
+    @Prop() data: expenseType[];
     @Element() element: HTMLElement;
 
     @Watch('data')
-    dataChanged(newValue: number[]) {
+    dataChanged(newValue: expenseType[]) {
         this.chart.setOption({
             series: [
               {
-                data: newValue,
-                type: 'bar'
+                data: newValue.map((item) => {
+                  return {
+                    value: item.amount,
+                    name: item.description
+                  };
+                }),
               }
             ]
           });
@@ -28,20 +32,47 @@ export class Chart {
         var chartDom = this.element.shadowRoot.getElementById('chart');
         this.chart = init(chartDom);
         this.chart.setOption({
-          xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-          },
-          yAxis: {
-            type: 'value'
-          },
-          series: [
-            {
-              data: this.data,
-              type: 'bar'
-            }
-          ]
-        });
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    top: '5%',
+    left: 'center'
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: ['40%', '70%'],
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: '#fff',
+        borderWidth: 2
+      },
+      label: {
+        show: false,
+        position: 'center'
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 40,
+          fontWeight: 'bold'
+        }
+      },
+      labelLine: {
+        show: false
+      },
+      data: this.data.map((item) => {
+        return {
+          value: item.amount,
+          name: item.description
+        };
+      })
+    }
+  ]
+});
       }
 
   render() {

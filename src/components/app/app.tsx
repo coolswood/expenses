@@ -1,7 +1,6 @@
 import { Component, h } from '@stencil/core';
 import formStore from '../../stores/formStore';
-import chartStore from '../../stores/chartStore';
-import { getGraphData } from '../../actions/graph';
+import expensesStore from '../../stores/expensesStore';
 import { getListData } from '../../actions/expenses';
 
 @Component({
@@ -12,13 +11,12 @@ import { getListData } from '../../actions/expenses';
 export class App {
 
   componentWillLoad() {
-    getGraphData();
     getListData();
   }
 
   render() {
     return <div class='root'>
-      <app-chart data={chartStore.chartWeekScores}></app-chart>
+      <app-chart data={expensesStore.expensesList}></app-chart>
     {formStore.shown && <app-form></app-form>}
       <app-list></app-list>
     </div>;

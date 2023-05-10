@@ -1,57 +1,54 @@
 import formStore from '../stores/formStore';
-import listStore from '../stores/listStore';
-import chartStore from '../stores/chartStore';
+import listStore from '../stores/expensesStore';
 import { SERVER_URL } from '../constants';
 import axios from 'axios';
 
 export const toggleForm = () => {
-  formStore.shown = !formStore.shown;
+    formStore.shown = !formStore.shown;
 };
 
 export const onChangeField = event => {
-  switch (event.target.name) {
-    case 'description':
-      formStore.description = event.target.value;
-      break;
-    case 'amount':
-      formStore.amount = event.target.value;
-      break;
-    default:
-      break;
-  }
+    switch (event.target.name) {
+        case 'description':
+            formStore.description = event.target.value;
+            break;
+        case 'amount':
+            formStore.amount = event.target.value;
+            break;
+        default:
+            break;
+    }
 };
 
 export const submit = e => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (formStore.id === null) {
-    axios
-      .post(`${SERVER_URL}/expenses`, {
-        description: formStore.description,
-        amount: formStore.amount,
-      })
-      .then(function (response) {
-        listStore.expensesList = response.data.expenses;
-        chartStore.chartWeekScores = response.data.chartWeekScores;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  } else {
-    axios
-      .patch(`${SERVER_URL}/expenses`, {
-        id: formStore.id,
-        description: formStore.description,
-        amount: formStore.amount,
-      })
-      .then(function (response) {
-        listStore.expensesList = response.data.expenses;
-        chartStore.chartWeekScores = response.data.chartWeekScores;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+    if (formStore.id === null) {
+        axios
+            .post(`${SERVER_URL}/expenses`, {
+                description: formStore.description,
+                amount: formStore.amount,
+            })
+            .then(function (response) {
+                listStore.expensesList = response.data.expenses;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    } else {
+        axios
+            .patch(`${SERVER_URL}/expenses`, {
+                id: formStore.id,
+                description: formStore.description,
+                amount: formStore.amount,
+            })
+            .then(function (response) {
+                listStore.expensesList = response.data.expenses;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
-  formStore.shown = false;
+    formStore.shown = false;
 };

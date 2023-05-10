@@ -7,12 +7,13 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppChart {
-        "data": number[];
+        "data": expenseType[];
     }
     interface AppForm {
     }
     interface AppItem {
         "amount": string;
+        "date": string;
         "description": string;
         "id": string;
     }
@@ -82,12 +83,13 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AppChart {
-        "data"?: number[];
+        "data"?: expenseType[];
     }
     interface AppForm {
     }
     interface AppItem {
         "amount"?: string;
+        "date"?: string;
         "description"?: string;
         "id"?: string;
         "onItemDelete"?: (event: AppItemCustomEvent<any>) => void;

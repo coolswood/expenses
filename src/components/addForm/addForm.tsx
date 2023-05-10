@@ -1,6 +1,6 @@
 import { Component, h } from '@stencil/core';
 import formStore from '../../stores/formStore';
-import { onChangeField, submit } from '../../actions/form';
+import { onChangeField, submit, toggleForm } from '../../actions/form';
 
 @Component({
   tag: 'app-form',
@@ -10,9 +10,7 @@ import { onChangeField, submit } from '../../actions/form';
 export class MyComponent {  
   render() {
     return (<div>
-      <div onClick={() => {
-            formStore.shown = false;
-        }} class='overlay'></div>
+      <div onClick={toggleForm} class='overlay'></div>
       <form onSubmit={submit} class='form'>
 
       <div>

@@ -8,6 +8,7 @@ import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 export class Item {
   @Prop() id: string;
   @Prop() description: string;
+  @Prop() date: string;
   @Prop() amount: string;
 
   @Event({
@@ -52,6 +53,12 @@ onEditHandler() {
   render() {
     return (
       <div class='item'>
+
+        <div>
+          <h3>Date</h3>
+          <p>{this.date}</p>
+        </div>
+
         <div>
           <h3>Description</h3>
           <p>{this.description}</p>

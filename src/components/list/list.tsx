@@ -1,5 +1,5 @@
 import { Component, Listen, h } from '@stencil/core';
-import listStore from '../../stores/listStore';
+import listStore from '../../stores/expensesStore';
 import { deleteItem, editItem } from '../../actions/expenses';
 import { toggleForm } from '../../actions/form';
 
@@ -23,11 +23,11 @@ export class List {
     return <div>
       {
         listStore.expensesList.map((expense) => {
-          return <app-item id={expense.id} description={expense.description} amount={expense.amount}></app-item>
+          return <app-item id={expense.id} date={expense.date} description={expense.description} amount={expense.amount}></app-item>
         })
       }
       <div>
-        <button onClick={toggleForm}>Add new</button>
+        <button class='add-button' onClick={toggleForm}>Add new</button>
       </div>
     </div>;
   }

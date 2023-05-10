@@ -23,20 +23,6 @@ main()
         await prisma.$disconnect();
     });
 
-const chartWeekHistory = [120, 150, 80, 70, 110, 130];
-// This data should be cached in the key/value database. For example, in Reddis. But I limited myself to storing it in a normal object, just to show the principle
-let currentMonth = 0;
-
-app.get('/init/graph', async (req, res) => {
-    const expenses = await prisma.expense.findMany();
-
-    expenses.forEach(expense => {
-        currentMonth += Number(expense.amount);
-    });
-
-    res.status(200).json({ chartWeekScores: [...chartWeekHistory, currentMonth] });
-});
-
 app.get('/init/expenses', async (req, res) => {
     const expenses = await prisma.expense.findMany();
 
@@ -58,23 +44,11 @@ app.post('/expenses', async (req, res) => {
 
     const expenses = await prisma.expense.findMany();
 
-    currentMonth += parseInt(amount);
-
-    res.status(200).json({ expenses, chartWeekScores: [...chartWeekHistory, currentMonth] });
+    res.status(200).json({ expenses });
 });
 
 app.patch('/expenses', async (req, res) => {
     const { description, amount, id } = req.body;
-
-    const expensePrev = await prisma.expense.findUnique({
-        where: {
-            id,
-        },
-    });
-
-    if (expensePrev !== null) {
-        currentMonth = currentMonth - parseInt(expensePrev.amount) + parseInt(amount);
-    }
 
     await prisma.expense.update({
         where: {
@@ -88,21 +62,11 @@ app.patch('/expenses', async (req, res) => {
 
     const expenses = await prisma.expense.findMany();
 
-    res.status(200).json({ expenses, chartWeekScores: [...chartWeekHistory, currentMonth] });
+    res.status(200).json({ expenses });
 });
 
 app.delete('/expenses', async (req, res) => {
     const { id } = req.body;
-
-    const expensePrev = await prisma.expense.findUnique({
-        where: {
-            id,
-        },
-    });
-
-    if (expensePrev !== null) {
-        currentMonth = currentMonth - parseInt(expensePrev.amount);
-    }
 
     await prisma.expense.delete({
         where: {
@@ -112,7 +76,7 @@ app.delete('/expenses', async (req, res) => {
 
     const expenses = await prisma.expense.findMany();
 
-    res.status(200).json({ expenses, chartWeekScores: [...chartWeekHistory, currentMonth] });
+    res.status(200).json({ expenses });
 });
 
 const PORT = 5001;
