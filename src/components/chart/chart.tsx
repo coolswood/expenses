@@ -33,7 +33,7 @@ export class MyComponent {
         this.chart = init(chartDom);
         this.chart.setOption(this.option);
 
-        chartStore.onChange('chartWeekScores', value => {
+        chartStore.onChange('chartWeekScores', () => {
             this.chart.setOption(this.option);
           });
       }

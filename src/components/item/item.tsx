@@ -2,6 +2,8 @@ import { Component, Listen, Prop, State, h, Event, EventEmitter } from '@stencil
 
 @Component({
   tag: 'app-item',
+  styleUrl: 'item.scss',
+  shadow: true
 })
 export class MyComponent {
   @Prop() id: string;
@@ -32,11 +34,13 @@ onEditHandler() {
 
   render() {
     return (
-      <div>
+      <div class='item'>
         <p>{this.description}</p>
         <p>{this.amount}</p>
+        <div>
         <button onClick={() => this.onEditHandler()}>edit</button>
         <button onClick={() => this.onDeleteHandler()}>delete</button>
+        </div>
       </div>
     );
   }

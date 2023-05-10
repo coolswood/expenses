@@ -14,7 +14,9 @@ export const onChangeField = event => {
   }
 };
 
-export const submit = () => {
+export const submit = e => {
+  e.preventDefault();
+
   if (formStore.id === null) {
     listStore.expensesList = [
       ...listStore.expensesList,

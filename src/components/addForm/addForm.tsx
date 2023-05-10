@@ -12,11 +12,15 @@ export class MyComponent {
         <div onClick={() => {
             formStore.shown = false;
         }} class='overlay'></div>
-      <div class='form'>
-        <input name='description' type="text" value={formStore.description} onChange={onChangeField} />
-        <input name='amount' type="text" value={formStore.amount} onChange={onChangeField} />
-        <button onClick={submit} disabled={formStore.description === '' || formStore.amount === ''}>Add</button>
-      </div>
+      <form onSubmit={submit} class='form'>
+      <label>Description
+      <input name='description' type="text" value={formStore.description} onChange={onChangeField} required />
+      </label>
+        <label>Amount
+        <input name='amount' type="number" value={formStore.amount} onChange={onChangeField} required />
+        </label>
+        <button type='submit'>Add</button>
+      </form>
     </div>);
   }
 }

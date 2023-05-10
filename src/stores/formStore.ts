@@ -7,6 +7,10 @@ const { state, onChange } = createStore({
   shown: false,
 });
 
-onChange('shown', value => {});
+onChange('shown', () => {
+  state.id = null;
+  state.description = '';
+  state.amount = '';
+});
 
 export default state;

@@ -3,11 +3,12 @@ import formStore from '../../stores/formStore';
 
 @Component({
   tag: 'app-root',
+  styleUrl: 'app.scss',
 })
 export class MyComponent {
 
   render() {
-    return <div>
+    return <div class='root'>
       <app-chart></app-chart>
     {formStore.shown && <app-form></app-form>}
       <app-list></app-list>
