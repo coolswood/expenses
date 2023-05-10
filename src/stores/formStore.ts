@@ -1,10 +1,10 @@
 import { createStore } from '@stencil/store';
 
 const { state, onChange } = createStore({
+  id: null,
   description: '',
   amount: '',
   shown: false,
-  isEditing: false,
 });
 
 onChange('shown', value => {});

@@ -20,10 +20,6 @@ export namespace Components {
     interface AppRoot {
     }
 }
-export interface AppFormCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLAppFormElement;
-}
 export interface AppItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLAppItemElement;
@@ -71,7 +67,6 @@ declare namespace LocalJSX {
     interface AppChart {
     }
     interface AppForm {
-        "onButtonClicked"?: (event: AppFormCustomEvent<any>) => void;
     }
     interface AppItem {
         "amount"?: string;
