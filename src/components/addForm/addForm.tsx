@@ -1,20 +1,19 @@
 import { Component, State, h, Event, EventEmitter } from '@stencil/core';
+import formStore from '../../stores/formStore';
 
 @Component({
   tag: 'app-form',
+  styleUrl: 'addForm.scss',
 })
 export class MyComponent {
-
-    @State() description: string;
-    @State() amount: string;
 
     onChangeField = (event) => {
         switch (event.target.name) {
             case 'description':
-                this.description = event.target.value;
+                formStore.description = event.target.value;
                 break;
             case 'amount':
-                this.amount = event.target.value;
+                formStore.amount = event.target.value;
                 break;
             default:
                 break;
@@ -27,20 +26,23 @@ export class MyComponent {
 
     buttonClickHandler() {
         this.buttonClicked.emit({
-            description: this.description,
-            amount: this.amount
+            description: formStore.description,
+            amount: formStore.amount
         });
-        
-        this.description = undefined;
-        this.amount = undefined;
+
+        formStore.description = undefined;
+        formStore.amount = undefined;
     }
   
   render() {
     return <div>
-      <div>
-        <input name='description' type="text" value={this.description} onChange={this.onChangeField} />
-        <input name='amount' type="text" value={this.amount} onChange={this.onChangeField} />
-        <button onClick={() => this.buttonClickHandler()} disabled={!this.description && !this.amount}>Add</button>
+        <div onClick={() => {
+            formStore.shown = false;
+        }} class='overlay'></div>
+      <div class='form'>
+        <input name='description' type="text" value={formStore.description} onChange={this.onChangeField} />
+        <input name='amount' type="text" value={formStore.amount} onChange={this.onChangeField} />
+        <button onClick={() => this.buttonClickHandler()} disabled={formStore.description === '' || formStore.amount === ''}>Add</button>
       </div>
     </div>;
   }

@@ -1,4 +1,5 @@
 import { Component, Listen, Prop, State, h } from '@stencil/core';
+import formStore from '../../stores/formStore';
 
 type expenseType = {
   id: string,
@@ -26,7 +27,6 @@ export class MyComponent {
 
   @Listen('itemEdit')
   onItemEdited(event: CustomEvent) {
-    console.log(event.detail);
     this.expensesList = this.expensesList.map((expense) => {
       if (expense.id === event.detail.id) {
         return event.detail;
@@ -35,15 +35,25 @@ export class MyComponent {
     });
   }
 
+  @Listen('itemDelete')
+  onItemDeleted(event: CustomEvent) {
+    this.expensesList = this.expensesList.filter((expense) => {
+      return expense.id !== event.detail.id;
+    });
+  }
+
   render() {
     return <div>
-      <app-form></app-form>
-
       {
         this.expensesList.map((expense) => {
           return <app-item id={expense.id} description={expense.description} amount={expense.amount}></app-item>
         })
       }
+      <div>
+        <button onClick={() => {
+          formStore.shown = true;
+        }}>Add new</button>
+      </div>
     </div>;
   }
 }

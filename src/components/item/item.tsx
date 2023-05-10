@@ -12,7 +12,7 @@ export class MyComponent {
     eventName: 'itemEdit',
 }) itemEdit: EventEmitter;
 
-buttonClickHandler() {
+onEditHandler() {
     this.itemEdit.emit({
         id: this.id,
         description: this.description,
@@ -20,12 +20,23 @@ buttonClickHandler() {
     });
 }
 
+  @Event({
+    eventName: 'itemDelete',
+  }) itemDelete: EventEmitter;
+
+  onDeleteHandler() {
+    this.itemDelete.emit({
+        id: this.id,
+    });
+  }
+
   render() {
     return (
       <div>
         <p>{this.description}</p>
         <p>{this.amount}</p>
-        <button onClick={() => this.buttonClickHandler()}>edit</button>
+        <button onClick={() => this.onEditHandler()}>edit</button>
+        <button onClick={() => this.onDeleteHandler()}>delete</button>
       </div>
     );
   }

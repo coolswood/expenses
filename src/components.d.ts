@@ -66,6 +66,7 @@ declare namespace LocalJSX {
         "amount"?: string;
         "description"?: string;
         "id"?: string;
+        "onItemDelete"?: (event: AppItemCustomEvent<any>) => void;
         "onItemEdit"?: (event: AppItemCustomEvent<any>) => void;
     }
     interface AppList {
