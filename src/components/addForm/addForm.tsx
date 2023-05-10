@@ -1,6 +1,6 @@
-import { Component, State, h, Event, EventEmitter } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 import formStore from '../../stores/formStore';
-import { onChangeField, submit } from './actions';
+import { onChangeField, submit } from '../../actions/form';
 
 @Component({
   tag: 'app-form',
@@ -9,16 +9,21 @@ import { onChangeField, submit } from './actions';
 export class MyComponent {  
   render() {
     return (<div>
-        <div onClick={() => {
+      <div onClick={() => {
             formStore.shown = false;
         }} class='overlay'></div>
       <form onSubmit={submit} class='form'>
-      <label>Description
-      <input name='description' type="text" value={formStore.description} onChange={onChangeField} required />
-      </label>
-        <label>Amount
+
+      <div>
+        <label htmlFor="description">Description</label>
+        <input name='description' type="text" value={formStore.description} onChange={onChangeField} required />
+      </div>
+    
+      <div>
+        <label htmlFor="amount">Amount</label>
         <input name='amount' type="number" value={formStore.amount} onChange={onChangeField} required />
-        </label>
+      </div>
+        
         <button type='submit'>Add</button>
       </form>
     </div>);

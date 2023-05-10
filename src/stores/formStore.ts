@@ -7,10 +7,12 @@ const { state, onChange } = createStore({
   shown: false,
 });
 
-onChange('shown', () => {
-  state.id = null;
-  state.description = '';
-  state.amount = '';
+onChange('shown', (value: boolean) => {
+  if (value === false) {
+    state.id = null;
+    state.description = '';
+    state.amount = '';
+  }
 });
 
 export default state;

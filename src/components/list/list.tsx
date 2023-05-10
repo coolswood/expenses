@@ -1,16 +1,12 @@
 import { Component, Listen, h } from '@stencil/core';
 import listStore from '../../stores/listStore';
-import { deleteItem, editItem, getListData, toggleForm } from './actions';
+import { deleteItem, editItem } from '../../actions/expenses';
+import { toggleForm } from '../../actions/form';
 
 @Component({
   tag: 'app-list',
 })
 export class MyComponent {
-
-  componentWillLoad() {
-    getListData();
-  }
-
   @Listen('itemEdit')
   onItemEdited(event: CustomEvent) {
     editItem(event.detail.id, event.detail.description, event.detail.amount);

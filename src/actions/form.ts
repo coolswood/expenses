@@ -1,8 +1,12 @@
-import formStore from '../../stores/formStore';
-import listStore from '../../stores/listStore';
-import chartStore from '../../stores/chartStore';
-import { SERVER_URL } from '../../constants';
+import formStore from '../stores/formStore';
+import listStore from '../stores/listStore';
+import chartStore from '../stores/chartStore';
+import { SERVER_URL } from '../constants';
 import axios from 'axios';
+
+export const toggleForm = () => {
+  formStore.shown = !formStore.shown;
+};
 
 export const onChangeField = event => {
   switch (event.target.name) {
@@ -28,7 +32,7 @@ export const submit = e => {
       })
       .then(function (response) {
         listStore.expensesList = response.data.expenses;
-        chartStore.state.chartWeekScores = response.data.chartWeekScores;
+        chartStore.chartWeekScores = response.data.chartWeekScores;
       })
       .catch(function (error) {
         console.log(error);
@@ -36,12 +40,13 @@ export const submit = e => {
   } else {
     axios
       .patch(`${SERVER_URL}/expenses`, {
+        id: formStore.id,
         description: formStore.description,
         amount: formStore.amount,
       })
       .then(function (response) {
         listStore.expensesList = response.data.expenses;
-        chartStore.state.chartWeekScores = response.data.chartWeekScores;
+        chartStore.chartWeekScores = response.data.chartWeekScores;
       })
       .catch(function (error) {
         console.log(error);

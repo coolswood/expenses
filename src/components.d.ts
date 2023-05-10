@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppChart {
+        "data": number[];
     }
     interface AppForm {
     }
@@ -65,6 +66,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AppChart {
+        "data"?: number[];
     }
     interface AppForm {
     }
