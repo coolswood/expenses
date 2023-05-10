@@ -5,8 +5,10 @@ import { toggleForm } from '../../actions/form';
 
 @Component({
   tag: 'app-list',
+  styleUrl: 'list.scss',
+  shadow: true
 })
-export class MyComponent {
+export class List {
   @Listen('itemEdit')
   onItemEdited(event: CustomEvent) {
     editItem(event.detail.id, event.detail.description, event.detail.amount);

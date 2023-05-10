@@ -20,10 +20,19 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface UiButton {
+        "buttonType": string;
+        "disabled": boolean;
+        "text": string;
+    }
 }
 export interface AppItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLAppItemElement;
+}
+export interface UiButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLUiButtonElement;
 }
 declare global {
     interface HTMLAppChartElement extends Components.AppChart, HTMLStencilElement {
@@ -56,12 +65,19 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLUiButtonElement extends Components.UiButton, HTMLStencilElement {
+    }
+    var HTMLUiButtonElement: {
+        prototype: HTMLUiButtonElement;
+        new (): HTMLUiButtonElement;
+    };
     interface HTMLElementTagNameMap {
         "app-chart": HTMLAppChartElement;
         "app-form": HTMLAppFormElement;
         "app-item": HTMLAppItemElement;
         "app-list": HTMLAppListElement;
         "app-root": HTMLAppRootElement;
+        "ui-button": HTMLUiButtonElement;
     }
 }
 declare namespace LocalJSX {
@@ -81,12 +97,19 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface UiButton {
+        "buttonType"?: string;
+        "disabled"?: boolean;
+        "onButtonClicked"?: (event: UiButtonCustomEvent<any>) => void;
+        "text"?: string;
+    }
     interface IntrinsicElements {
         "app-chart": AppChart;
         "app-form": AppForm;
         "app-item": AppItem;
         "app-list": AppList;
         "app-root": AppRoot;
+        "ui-button": UiButton;
     }
 }
 export { LocalJSX as JSX };
@@ -98,6 +121,7 @@ declare module "@stencil/core" {
             "app-item": LocalJSX.AppItem & JSXBase.HTMLAttributes<HTMLAppItemElement>;
             "app-list": LocalJSX.AppList & JSXBase.HTMLAttributes<HTMLAppListElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "ui-button": LocalJSX.UiButton & JSXBase.HTMLAttributes<HTMLUiButtonElement>;
         }
     }
 }

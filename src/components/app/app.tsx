@@ -7,8 +7,9 @@ import { getListData } from '../../actions/expenses';
 @Component({
   tag: 'app-root',
   styleUrl: 'app.scss',
+  shadow: true
 })
-export class MyComponent {
+export class App {
 
   componentWillLoad() {
     getGraphData();

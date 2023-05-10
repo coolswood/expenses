@@ -1,11 +1,11 @@
-import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
 
 @Component({
   tag: 'app-item',
   styleUrl: 'item.scss',
   shadow: true
 })
-export class MyComponent {
+export class Item {
   @Prop() id: string;
   @Prop() description: string;
   @Prop() amount: string;
@@ -32,14 +32,39 @@ onEditHandler() {
     });
   }
 
+  @Listen('buttonClicked')
+  onButtonClicked(event: CustomEvent<{
+    buttonType: string;
+  }>) {
+    const buttonType = event.detail.buttonType;
+
+    switch (buttonType) {
+      case 'edit':
+        this.onEditHandler();
+        break;
+      case 'delete':
+        this.onDeleteHandler();
+        break;
+    }
+    
+  }
+
   render() {
     return (
       <div class='item'>
-        <p>{this.description}</p>
-        <p>{this.amount}</p>
         <div>
-        <button onClick={() => this.onEditHandler()}>edit</button>
-        <button onClick={() => this.onDeleteHandler()}>delete</button>
+          <h3>Description</h3>
+          <p>{this.description}</p>
+        </div>
+        
+        <div>
+          <h3>Amount</h3>
+          <p>{this.amount}</p>
+        </div>
+
+        <div>
+          <ui-button buttonType='edit' text='Edit'></ui-button>
+          <ui-button buttonType='delete' text='Delete'></ui-button>
         </div>
       </div>
     );

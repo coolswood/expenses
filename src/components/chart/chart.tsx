@@ -6,7 +6,7 @@ import {init, ECharts} from 'echarts';
   styleUrl: 'chart.scss',
   shadow: true
 })
-export class MyComponent {
+export class Chart {
     @Prop() data: number[];
     @Element() element: HTMLElement;
 

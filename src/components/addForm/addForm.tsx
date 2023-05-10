@@ -5,6 +5,7 @@ import { onChangeField, submit } from '../../actions/form';
 @Component({
   tag: 'app-form',
   styleUrl: 'addForm.scss',
+  shadow: true
 })
 export class MyComponent {  
   render() {
