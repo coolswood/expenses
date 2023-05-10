@@ -1,7 +1,6 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 import formStore from '../../stores/formStore';
-import axios from 'axios';
-import { SERVER_URL } from '../../constants';
+import { getGraphData } from './actions';
 
 @Component({
   tag: 'app-root',
@@ -10,13 +9,7 @@ import { SERVER_URL } from '../../constants';
 export class MyComponent {
 
   componentWillLoad() {
-    axios.get(`${SERVER_URL}/init/list`)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+    getGraphData();
   }
 
   render() {

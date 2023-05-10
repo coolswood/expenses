@@ -1,5 +1,8 @@
 import formStore from '../../stores/formStore';
 import listStore from '../../stores/listStore';
+import chartStore from '../../stores/chartStore';
+import { SERVER_URL } from '../../constants';
+import axios from 'axios';
 
 export const onChangeField = event => {
   switch (event.target.name) {
@@ -18,22 +21,31 @@ export const submit = e => {
   e.preventDefault();
 
   if (formStore.id === null) {
-    listStore.expensesList = [
-      ...listStore.expensesList,
-      {
-        id: Math.random().toString(),
+    axios
+      .post(`${SERVER_URL}/expenses`, {
         description: formStore.description,
         amount: formStore.amount,
-      },
-    ];
+      })
+      .then(function (response) {
+        listStore.expensesList = response.data.expenses;
+        chartStore.state.chartWeekScores = response.data.chartWeekScores;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   } else {
-    listStore.expensesList = listStore.expensesList.map(item => {
-      if (item.id === formStore.id) {
-        item.description = formStore.description;
-        item.amount = formStore.amount;
-      }
-      return item;
-    });
+    axios
+      .patch(`${SERVER_URL}/expenses`, {
+        description: formStore.description,
+        amount: formStore.amount,
+      })
+      .then(function (response) {
+        listStore.expensesList = response.data.expenses;
+        chartStore.state.chartWeekScores = response.data.chartWeekScores;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   formStore.shown = false;
