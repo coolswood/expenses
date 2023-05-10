@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AppChart {
+    }
     interface AppForm {
     }
     interface AppItem {
@@ -27,6 +29,12 @@ export interface AppItemCustomEvent<T> extends CustomEvent<T> {
     target: HTMLAppItemElement;
 }
 declare global {
+    interface HTMLAppChartElement extends Components.AppChart, HTMLStencilElement {
+    }
+    var HTMLAppChartElement: {
+        prototype: HTMLAppChartElement;
+        new (): HTMLAppChartElement;
+    };
     interface HTMLAppFormElement extends Components.AppForm, HTMLStencilElement {
     }
     var HTMLAppFormElement: {
@@ -52,6 +60,7 @@ declare global {
         new (): HTMLAppRootElement;
     };
     interface HTMLElementTagNameMap {
+        "app-chart": HTMLAppChartElement;
         "app-form": HTMLAppFormElement;
         "app-item": HTMLAppItemElement;
         "app-list": HTMLAppListElement;
@@ -59,6 +68,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface AppChart {
+    }
     interface AppForm {
         "onButtonClicked"?: (event: AppFormCustomEvent<any>) => void;
     }
@@ -74,6 +85,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface IntrinsicElements {
+        "app-chart": AppChart;
         "app-form": AppForm;
         "app-item": AppItem;
         "app-list": AppList;
@@ -84,6 +96,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-chart": LocalJSX.AppChart & JSXBase.HTMLAttributes<HTMLAppChartElement>;
             "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-item": LocalJSX.AppItem & JSXBase.HTMLAttributes<HTMLAppItemElement>;
             "app-list": LocalJSX.AppList & JSXBase.HTMLAttributes<HTMLAppListElement>;

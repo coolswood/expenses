@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "@stencil/core": "^3.0.0",
-    "@stencil/sass": "^3.0.2"
+    "@stencil/sass": "^3.0.2",
+    "echarts": "^5.4.2"
   },
   "devDependencies": {
     "@stencil/store": "^2.0.6",

@@ -8,6 +8,7 @@ export class MyComponent {
 
   render() {
     return <div>
+      <app-chart></app-chart>
     {formStore.shown && <app-form></app-form>}
       <app-list></app-list>
     </div>;
