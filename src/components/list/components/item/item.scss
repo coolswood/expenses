@@ -2,9 +2,12 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #fff;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    h3 {
+        color: var(--primary-color);
+    }
 }

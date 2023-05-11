@@ -26,6 +26,8 @@ export namespace Components {
         "disabled": boolean;
         "text": string;
     }
+    interface UiThemeToggle {
+    }
 }
 export interface AppItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -72,6 +74,12 @@ declare global {
         prototype: HTMLUiButtonElement;
         new (): HTMLUiButtonElement;
     };
+    interface HTMLUiThemeToggleElement extends Components.UiThemeToggle, HTMLStencilElement {
+    }
+    var HTMLUiThemeToggleElement: {
+        prototype: HTMLUiThemeToggleElement;
+        new (): HTMLUiThemeToggleElement;
+    };
     interface HTMLElementTagNameMap {
         "app-chart": HTMLAppChartElement;
         "app-form": HTMLAppFormElement;
@@ -79,6 +87,7 @@ declare global {
         "app-list": HTMLAppListElement;
         "app-root": HTMLAppRootElement;
         "ui-button": HTMLUiButtonElement;
+        "ui-theme-toggle": HTMLUiThemeToggleElement;
     }
 }
 declare namespace LocalJSX {
@@ -105,6 +114,8 @@ declare namespace LocalJSX {
         "onButtonClicked"?: (event: UiButtonCustomEvent<any>) => void;
         "text"?: string;
     }
+    interface UiThemeToggle {
+    }
     interface IntrinsicElements {
         "app-chart": AppChart;
         "app-form": AppForm;
@@ -112,6 +123,7 @@ declare namespace LocalJSX {
         "app-list": AppList;
         "app-root": AppRoot;
         "ui-button": UiButton;
+        "ui-theme-toggle": UiThemeToggle;
     }
 }
 export { LocalJSX as JSX };
@@ -124,6 +136,7 @@ declare module "@stencil/core" {
             "app-list": LocalJSX.AppList & JSXBase.HTMLAttributes<HTMLAppListElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "ui-button": LocalJSX.UiButton & JSXBase.HTMLAttributes<HTMLUiButtonElement>;
+            "ui-theme-toggle": LocalJSX.UiThemeToggle & JSXBase.HTMLAttributes<HTMLUiThemeToggleElement>;
         }
     }
 }

@@ -1,17 +1,22 @@
-:root[data-theme="theme-light"] {
-    --primary-color: #0072a3;
-    --text-color: #333333;
-    --bg-color: #fafafa;
-    --component-bg-color: #ffffff;
+:host-context([data-theme=light]) {
+    --primary-color: #000;
+    --background-color: #fff;
 }
 
-:root[data-theme="theme-dark"] {
-    --primary-color: #49afd9;
-    --text-color: #e3f5fc;
-    --bg-color: #1b2a32;
-    --component-bg-color: #22343c;
+:host-context([data-theme=dark]) {
+    --primary-color: #fff;
+    --background-color: #1f1c1c;
 }
 
-h3, p {
-    color: var(--text-color);
+:host {
+    font-family: 'Roboto', sans-serif;
+
+    h3 {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    p {
+        color: var(--primary-color);
+    }
 }

@@ -1,4 +1,11 @@
+.bg {
+    background-color: var(--background-color);
+    width: 100%;
+    min-height: 100vh;
+}
+
 .root {
     max-width: 900px;
     margin: auto;
+    padding: 20px 0;
 }

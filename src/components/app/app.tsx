@@ -15,10 +15,13 @@ export class App {
   }
 
   render() {
-    return <div class='root'>
+    return <div class='bg'>
+<div class='root'>
+      <ui-theme-toggle></ui-theme-toggle>
       <app-chart data={expensesStore.expensesList}></app-chart>
     {formStore.shown && <app-form></app-form>}
       <app-list></app-list>
-    </div>;
+    </div>
+    </div>
   }
 }

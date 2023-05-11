@@ -35,13 +35,8 @@ export class Chart {
   tooltip: {
     trigger: 'item'
   },
-  legend: {
-    top: '5%',
-    left: 'center'
-  },
   series: [
     {
-      name: 'Access From',
       type: 'pie',
       radius: ['40%', '70%'],
       avoidLabelOverlap: false,

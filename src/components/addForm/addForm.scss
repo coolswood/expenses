@@ -26,3 +26,17 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
 }
+
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        margin: 10px 0;
+    }
+}
+
+.button {
+    margin-top: 20px;
+}
