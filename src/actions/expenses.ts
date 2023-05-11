@@ -8,7 +8,6 @@ export const getListData = async () => {
     axios
         .get(`${SERVER_URL}/init/expenses`)
         .then(function (response) {
-            console.log(response.data.expenses);
             listStore.expensesList = response.data.expenses;
         })
         .catch(function (error) {
@@ -16,10 +15,11 @@ export const getListData = async () => {
         });
 };
 
-export const editItem = (id: string, description: string, amount: string) => {
+export const editItem = (id: string, description: string, amount: string, date: string) => {
     formStore.amount = amount;
     formStore.description = description;
     formStore.id = id;
+    formStore.date = date;
 
     toggleForm();
 };

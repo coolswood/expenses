@@ -28,6 +28,7 @@
   "dependencies": {
     "@stencil/core": "^3.0.0",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.7",
     "echarts": "^5.4.2"
   },
   "devDependencies": {

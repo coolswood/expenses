@@ -2,6 +2,7 @@ import formStore from '../stores/formStore';
 import listStore from '../stores/expensesStore';
 import { SERVER_URL } from '../constants';
 import axios from 'axios';
+import { getCurrentTimeStamp } from '../utils';
 
 export const toggleForm = () => {
     formStore.shown = !formStore.shown;
@@ -20,14 +21,19 @@ export const onChangeField = event => {
     }
 };
 
-export const submit = e => {
-    e.preventDefault();
+export const onChangeDate = event => {
+    formStore.date = event.target.value;
+};
+
+export const submit = event => {
+    event.preventDefault();
 
     if (formStore.id === null) {
         axios
             .post(`${SERVER_URL}/expenses`, {
                 description: formStore.description,
                 amount: formStore.amount,
+                date: formStore.date || getCurrentTimeStamp(),
             })
             .then(function (response) {
                 listStore.expensesList = response.data.expenses;
@@ -41,6 +47,7 @@ export const submit = e => {
                 id: formStore.id,
                 description: formStore.description,
                 amount: formStore.amount,
+                date: formStore.date,
             })
             .then(function (response) {
                 listStore.expensesList = response.data.expenses;

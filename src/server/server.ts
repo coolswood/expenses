@@ -32,13 +32,14 @@ app.get('/init/expenses', async (req, res) => {
 app.post('/expenses', async (req, res) => {
     const randomId = Math.random().toString(36).substring(7);
 
-    const { description, amount } = req.body;
+    const { description, amount, date } = req.body;
 
     await prisma.expense.create({
         data: {
             id: randomId,
             description,
             amount,
+            date,
         },
     });
 
@@ -48,7 +49,7 @@ app.post('/expenses', async (req, res) => {
 });
 
 app.patch('/expenses', async (req, res) => {
-    const { description, amount, id } = req.body;
+    const { description, amount, id, date } = req.body;
 
     await prisma.expense.update({
         where: {
@@ -57,6 +58,7 @@ app.patch('/expenses', async (req, res) => {
         data: {
             description,
             amount,
+            date,
         },
     });
 

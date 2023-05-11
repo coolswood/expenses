@@ -11,7 +11,7 @@ import { toggleForm } from '../../actions/form';
 export class List {
   @Listen('itemEdit')
   onItemEdited(event: CustomEvent) {
-    editItem(event.detail.id, event.detail.description, event.detail.amount);
+    editItem(event.detail.id, event.detail.description, event.detail.amount, event.detail.date);
   }
 
   @Listen('itemDelete')

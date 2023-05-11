@@ -1,4 +1,5 @@
 import { Component, Prop, h, Event, EventEmitter, Listen } from '@stencil/core';
+import { formatData } from '../../../../utils';
 
 @Component({
   tag: 'app-item',
@@ -19,7 +20,8 @@ onEditHandler() {
     this.itemEdit.emit({
         id: this.id,
         description: this.description,
-        amount: this.amount
+        amount: this.amount,
+        date: this.date
     });
 }
 
@@ -56,7 +58,7 @@ onEditHandler() {
 
         <div>
           <h3>Date</h3>
-          <p>{this.date}</p>
+          <p>{formatData(this.date)}</p>
         </div>
 
         <div>
