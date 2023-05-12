@@ -15,7 +15,7 @@ When using the holistic approach, it is important to remember about component pu
 
 I have made some simplifications to save time. For example, I use Typescript, but the typing is not 100% because it was not in the conditions of the task. Of course, in a working project I do not allow the absence of contracts.
 
-Also, switching the theme was implemented without storing information about the theme in the storeroom. In the current project this would have been necessary.
+Also, switching the theme was implemented without storing information about the theme in the app store. In the current project this would have been necessary.
 
 ## Backend project structure
 
