@@ -72,8 +72,8 @@ onEditHandler() {
         </div>
 
         <div>
-          <ui-button buttonType='edit' text='Edit'></ui-button>
-          <ui-button buttonType='delete' text='Delete'></ui-button>
+          <ui-button buttonType='edit' text='Edit' />
+          <ui-button buttonType='delete' text='Delete' />
         </div>
       </div>
     );
