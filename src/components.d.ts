@@ -15,7 +15,7 @@ export namespace Components {
         "amount": string;
         "date": string;
         "description": string;
-        "id": string;
+        "idEl": string;
     }
     interface AppList {
     }
@@ -100,7 +100,7 @@ declare namespace LocalJSX {
         "amount"?: string;
         "date"?: string;
         "description"?: string;
-        "id"?: string;
+        "idEl"?: string;
         "onItemDelete"?: (event: AppItemCustomEvent<any>) => void;
         "onItemEdit"?: (event: AppItemCustomEvent<any>) => void;
     }

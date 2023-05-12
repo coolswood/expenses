@@ -1,4 +1,4 @@
-import { Component, Prop, h, Event, EventEmitter } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 @Component({
   tag: 'ui-theme-toggle',

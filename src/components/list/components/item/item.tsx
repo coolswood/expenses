@@ -7,7 +7,7 @@ import { formatData } from '../../../../utils';
   shadow: true
 })
 export class Item {
-  @Prop() id: string;
+  @Prop() idEl: string;
   @Prop() description: string;
   @Prop() date: string;
   @Prop() amount: string;
@@ -18,7 +18,7 @@ export class Item {
 
 onEditHandler() {
     this.itemEdit.emit({
-        id: this.id,
+        id: this.idEl,
         description: this.description,
         amount: this.amount,
         date: this.date
@@ -31,7 +31,7 @@ onEditHandler() {
 
   onDeleteHandler() {
     this.itemDelete.emit({
-        id: this.id,
+        id: this.idEl,
     });
   }
 

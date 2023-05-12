@@ -23,7 +23,7 @@ export class List {
     return <div>
       {
         listStore.expensesList.map((expense) => {
-          return <app-item id={expense.id} date={expense.date} description={expense.description} amount={expense.amount} />
+          return <app-item idEl={expense.id} date={expense.date} description={expense.description} amount={expense.amount} />
         })
       }
       <div>
