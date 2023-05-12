@@ -1,5 +1,15 @@
 import { Component, Prop, h, Element, Watch } from '@stencil/core';
-import {init, ECharts} from 'echarts';
+
+import * as echarts from 'echarts/core';
+
+import { PieChart } from 'echarts/charts';
+
+import { CanvasRenderer } from 'echarts/renderers';
+
+echarts.use([
+  PieChart,
+  CanvasRenderer
+]);
 
 @Component({
   tag: 'app-chart',
@@ -12,7 +22,7 @@ export class Chart {
 
     @Watch('data')
     dataChanged(newValue: expenseType[]) {
-        this.chart.setOption({
+        this.chartComponent.setOption({
             series: [
               {
                 data: newValue.map((item) => {
@@ -26,48 +36,49 @@ export class Chart {
           });
     }
     
-    private chart: ECharts;
+    private chartComponent: echarts.ECharts;
 
     componentDidLoad(){
         var chartDom = this.element.shadowRoot.getElementById('chart');
-        this.chart = init(chartDom);
-        this.chart.setOption({
-  tooltip: {
-    trigger: 'item'
-  },
-  series: [
-    {
-      type: 'pie',
-      radius: ['40%', '70%'],
-      avoidLabelOverlap: false,
-      itemStyle: {
-        borderRadius: 10,
-        borderColor: '#fff',
-        borderWidth: 2
-      },
-      label: {
-        show: false,
-        position: 'center'
-      },
-      emphasis: {
-        label: {
-          show: true,
-          fontSize: 40,
-          fontWeight: 'bold'
-        }
-      },
-      labelLine: {
-        show: false
-      },
-      data: this.data.map((item) => {
-        return {
-          value: item.amount,
-          name: item.description
-        };
-      })
-    }
-  ]
-});
+        this.chartComponent = echarts.init(chartDom);
+        this.chartComponent.setOption(
+          {
+            tooltip: {
+              trigger: 'item'
+            },
+            series: [
+              {
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                  borderRadius: 10,
+                  borderColor: '#fff',
+                  borderWidth: 2
+                },
+                label: {
+                  show: false,
+                  position: 'center'
+                },
+                emphasis: {
+                  label: {
+                    show: true,
+                    fontSize: 40,
+                    fontWeight: 'bold'
+                  }
+                },
+                labelLine: {
+                  show: false
+                },
+                data: this.data.map((item) => {
+                  return {
+                    value: item.amount,
+                    name: item.description
+                  };
+                })
+              }
+            ]
+          });
       }
 
   render() {

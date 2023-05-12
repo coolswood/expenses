@@ -10,9 +10,7 @@ export const getListData = async () => {
         .then(function (response) {
             listStore.expensesList = response.data.expenses;
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch(console.error);
 };
 
 export const editItem = (id: string, description: string, amount: string, date: string) => {
@@ -34,7 +32,5 @@ export const deleteItem = (id: string) => {
         .then(function (response) {
             listStore.expensesList = response.data.expenses;
         })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .catch(console.error);
 };

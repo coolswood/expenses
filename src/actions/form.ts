@@ -35,12 +35,10 @@ export const submit = event => {
                 amount: formStore.amount,
                 date: formStore.date || getCurrentTimeStamp(),
             })
-            .then(function (response) {
+            .then(response => {
                 listStore.expensesList = response.data.expenses;
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(console.error);
     } else {
         axios
             .patch(`${SERVER_URL}/expenses`, {
@@ -49,12 +47,10 @@ export const submit = event => {
                 amount: formStore.amount,
                 date: formStore.date,
             })
-            .then(function (response) {
+            .then(response => {
                 listStore.expensesList = response.data.expenses;
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(console.error);
     }
 
     formStore.shown = false;
